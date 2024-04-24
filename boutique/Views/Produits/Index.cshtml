@@ -1,0 +1,51 @@
+﻿
+@model List<Produit>
+@{
+}
+<h2 class="text-center mb-5">Liste des produits</h2>
+<div class="row mb-5">
+    <div class="col">
+        <a class="btn btn-primary" asp-controller="Produits" asp-action="Create">Nouveau produit</a>
+    </div>
+    <div class="col">
+
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Marque</th>
+            <th>Categorie</th>
+            <th>Prix</th>
+            <th>Image</th>
+            <th>Creation</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var produit in Model)
+        {
+            <tr>
+                <td>@produit.Id</td>
+                <td>@produit.Name</td>
+                <td>@produit.Brand<td>
+                <td>@produit.Category</td>
+                <td>@(produit.Price)$</td>
+                <td><img src="/Produits/@produit.ImageFileName" width="100"/></td>
+                <td>@produit.CreatedAt.ToString("MM/dd/yyyy")</td>
+                <td></td>
+              <td class="white-space:nowrap">
+
+                    <a class="btn btn-primary btn-sm" asp-controller="Produits" asp-action="Edit" asp-route-id="@produit.Id">Modifier</a>
+
+                    <a class="btn btn-danger btn-sm" asp-controller="Produits" asp-action="Delete"
+                       asp-route-id="@produit.Id" onclick="return confirm('Etes vous sûr de supprimer @produit.Name')">Supprimer</a>  
+              </td>
+            </tr>
+        }
+    </tbody>
+</table>
